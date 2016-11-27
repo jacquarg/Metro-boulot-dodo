@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+<head>
+	<style>
+body {
+    background-color: #E4E4E4;
+}
+</style>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+     google.charts.load('current', {packages: ['corechart']});     
+   </script>
+   <div style="text-align: center;">
+   <h2 class="piechartheader">Lundi</h2>
+</head>
+<body>
+<script language="JavaScript">
+function drawChart() {
+   // Define the chart to be drawn.
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Real Life', 'Telephone', 'Internet', 'Real Life Average'],
+          ['Métro', 0.15, 0.15, , 0.125],
+          ['Boulot', 2.3, 1.3, 2, 1.75 ],
+          ['Dodo', 8.9, , , 7.125],
+          ['Loisir', 1.1, 1, 2.3, 0.8],
+          ['Maison', 1.5, 1, 1.5, 1.5]
+        ]);
+      var options = {
+		title :'',
+        width: 1900,
+        height: 850,
+		animation:{
+			duration: 1000,
+			easing: 'out',
+			startup: true
+					},
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '75%' },
+        isStacked: true,
+		backgroundColor: '#E4E4E4',
+		series: {
+         0: { color: '#36BFC7' },
+         1: { color: '#F00' },
+         2: { color: '#FF4500' },
+		 3: {type : 'steppedArea' }
+          }
+
+      };
+   // Instantiate and draw the chart.
+   var chart = new google.visualization.ColumnChart(document.getElementById('container'));
+   chart.draw(data, options);
+}
+google.charts.setOnLoadCallback(drawChart);
+   
+
+</script>
+<div id="container" style="width: 1900px; height: 850; margin: 0 auto"></div>
+</body>
+</html>

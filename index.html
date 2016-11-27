@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+<head>
+   <link rel="index.html" href="index.css"/>
+   <meta charset="UTF-8">
+	<style>
+body {
+    background-color: #E4E4E4;
+}
+</style>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+     google.charts.load('current', {packages: ['corechart']});     
+   </script>
+   <div style="text-align: center;">
+   <h2 class="piechartheader">Lundi</h2>
+</head>
+<style type="text/css">
+	.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(255,0,0); /* Fallback color */
+    background-color: rgba(255,255,255,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 0;
+    border: 0px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2),0 6px 20px 0 rgba(255,255,255,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: black;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	background-position: center;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 30px 100px;
+    background-color: rgb(255,40,40);
+    text-align: center;
+    color: black;
+}
+
+h{
+	font-size: 30px;
+}
+
+.modal-body {
+	padding: 2px 16px;
+	border-right: 50%;
+    background-color: white;
+    color: black;
+}
+
+</style>
+<!-- Trigger/Open The Modal -->
+<div id="myBtn"></div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h>Comment c'est passé votre nuit ?</h>
+    </div>
+    <div class="modal-body">
+	<span class="close"><img src="smiley.jpg" onclick="javascript:tafonction();" alt="smiley" style="cursor:pointer;" /></span>
+    </div>
+  </div>
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+<body>
+<style>
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+</style>
+<script language="JavaScript">
+function updateContactList(){
+  cozysdk.defineRequest('Contact', 'all', 'function(doc) { emit(doc.n); }', function(err, res) {
+    if (err != null) return alert(err);
+    cozysdk.run('Contact', 'all', {}, function(err, res) {
+      if (err != null) return alert(err);
+      var contacts = res;
+      /* contacts == [
+        {id:"323274828329", key:"Jane;Willson"},
+        {id:"323274827428", key:"John;Smith"}
+      ]*/
+    });
+  });
+}
+</script>
+<script language="JavaScript">
+function drawChart() {
+   // Define the chart to be drawn.
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Real Life', 'Telephone', 'Internet', 'Real Life Average'],
+          ['Métro', 0.3, 0, , 0.25],
+          ['Boulot', 2.3, 1.3, 2, 1.75 ],
+          ['Dodo', 8.9, , , 7.125],
+          ['Loisir', 1.1, 1, 2.3, 0.8],
+          ['Maison', 1.5, 1, 1.5, 1.5]
+        ]);
+      var options = {
+		title :'',
+        width: 1900,
+        height: 850,
+		animation:{
+			duration: 1000,
+			easing: 'out',
+			startup: true
+					},
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '75%' },
+        isStacked: true,
+		backgroundColor: '#E4E4E4',
+		series: {
+         0: { color: '#36BFC7' },
+         1: { color: '#F00' },
+         2: { color: '#FF4500' },
+		 3: {type : 'steppedArea' }
+          }
+
+      };
+   // Instantiate and draw the chart.
+   var chart = new google.visualization.ColumnChart(document.getElementById('container'));
+   chart.draw(data, options);
+}
+google.charts.setOnLoadCallback(drawChart);
+   
+
+</script>
+<div id="container" style="width: 1900px; height: 850; margin: 0 auto"></div>
+</body>
+</html>
